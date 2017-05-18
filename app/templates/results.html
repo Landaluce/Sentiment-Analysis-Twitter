@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                Positive:
+            </td>
+            <td>
+                {{ results[0] }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Neutral:
+            </td>
+            <td>
+                {{ results[1] }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Negative:
+            </td>
+            <td>
+                {{ results[2] }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Empty:
+            </td>
+            <td>
+                {{ results[3] }}
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <form method='POST'>
+                    <input name='reset' type='submit' value='Reset'>
+                </form>
+            </td>
+        </tr>
+
+    </table>
+</body>
+</html>

@@ -10,10 +10,10 @@ def get_tweets(search_query, number_tweets=50):
     :param number_tweets: number of tweets to get (Integer)
     :return: List of tweets
     """
-    consumer_key = 'RLBnivPChhdTjB9s2lL1M88Po'
-    consumer_secret = 'UFXipb6TJb9H9vGolaZoxQczRbPfsy5QafwYSlK80ypAJvfmYx'
-    access_token = '850748910930972672-wTQ7Gm0zUhrhipOm49N4gpWW6CXwZer'
-    access_token_secret = 'Tnj3vU8kc51rti8kfZRRvphfs7vDD6dfbDcYLYpnEv8uP'
+    consumer_key = 'XXXXXX'
+    consumer_secret = 'XXXXXX'
+    access_token = 'XXXXXX'
+    access_token_secret = 'XXXXXX'
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)

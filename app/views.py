@@ -11,6 +11,6 @@ def index():
             return render_template("index.html")
         search_query = request.form['search_query']
         quantity = request.form['quantity']
-        results = get_sentiments(search_query, int(quantity))
-        return render_template("results.html", results=results)
+        results, zipped = get_sentiments(search_query, int(quantity))
+        return render_template("results.html", results=results, zipped=zipped)
     return render_template("index.html")

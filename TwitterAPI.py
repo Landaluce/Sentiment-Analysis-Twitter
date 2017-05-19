@@ -14,6 +14,10 @@ def get_tweets(search_query, number_tweets=50):
     consumer_secret = 'XXXXXX'
     access_token = 'XXXXXX'
     access_token_secret = 'XXXXXX'
+    consumer_key = 'RLBnivPChhdTjB9s2lL1M88Po'
+    consumer_secret = 'UFXipb6TJb9H9vGolaZoxQczRbPfsy5QafwYSlK80ypAJvfmYx'
+    access_token = '850748910930972672-wTQ7Gm0zUhrhipOm49N4gpWW6CXwZer'
+    access_token_secret = 'Tnj3vU8kc51rti8kfZRRvphfs7vDD6dfbDcYLYpnEv8uP'
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
@@ -25,7 +29,7 @@ def get_tweets(search_query, number_tweets=50):
         new_text = scrub_tweet(tweet.text)
         if len(new_text) > 0:
             text.append(new_text)
-    return text
+    return text, tweets
 
 
 def scrub_tweet(tweet):
@@ -83,13 +87,22 @@ def get_tweet_sentiment(tweet):
 
 
 def get_sentiments(search_query, number_tweets):
-    tweets = get_tweets(search_query, number_tweets)
+    texts, tweets = get_tweets(search_query, number_tweets)
+    users = []
+    messages = []
+    for tweet in tweets:
+        if tweet.text.startswith("RT @"):
+            temp = re.sub('RT @.*:', '', tweet.text)
+            messages.append(temp)
+        else:
+            messages.append(tweet.text)
+        users.append(tweet.user.name)
     positive = 0
     neutral = 0
     negative = 0
 
-    for tweet in tweets:
-        sentiment = get_tweet_sentiment(tweet)
+    for text in texts:
+        sentiment = get_tweet_sentiment(text)
         if sentiment > 0:
             positive += 1
         elif sentiment == 0:
@@ -97,7 +110,8 @@ def get_sentiments(search_query, number_tweets):
         else:
             negative += 1
 
-    empty_tweets = number_tweets - (positive + neutral + negative)
+    found = positive + neutral + negative
+    zipped_content = zip(users, messages)
 
-    return [positive, neutral, negative, empty_tweets]
+    return [positive, neutral, negative, found], zipped_content
 
